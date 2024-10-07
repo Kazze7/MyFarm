@@ -3,6 +3,13 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+[Tt]est/
+[Tt]rash/
+[Pp]rototype/
+
+# Godot 4+ specific ignores
+.godot/
+
 # User-specific files
 *.rsuser
 *.suo
