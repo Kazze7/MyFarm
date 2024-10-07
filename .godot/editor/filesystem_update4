@@ -1,0 +1,9 @@
+res://Scenes/GameManager.tscn
+res://PlaneMat.tres
+res://World.tres
+res://Scenes/Game.tscn
+res://Scenes/Game.cs
+res://Scenes/GameManager.cs
+res://GameConfig.json
+res://Scripts/GameManager.cs
+res://Scripts/Game.cs

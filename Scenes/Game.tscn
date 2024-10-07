@@ -1,0 +1,79 @@
+[gd_scene load_steps=7 format=3 uid="uid://bko1f5valyr76"]
+
+[ext_resource type="Material" uid="uid://etknxtxl1lxt" path="res://PlaneMat.tres" id="1_2p2sx"]
+[ext_resource type="Script" path="res://Scenes/Game.cs" id="1_8o4w5"]
+[ext_resource type="Environment" uid="uid://brsjcsvmnh2nl" path="res://World.tres" id="2_cmps5"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_gx3wq"]
+material = ExtResource("1_2p2sx")
+orientation = 1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pe025"]
+size = Vector3(1, 0, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_egqyk"]
+
+[node name="Game" type="Node3D"]
+script = ExtResource("1_8o4w5")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+
+[node name="Panel" type="Panel" parent="UI"]
+visible = false
+layout_mode = 0
+offset_left = 18.0
+offset_top = 20.0
+offset_right = 728.0
+offset_bottom = 391.0
+
+[node name="Button" type="Button" parent="UI"]
+visible = false
+layout_mode = 0
+offset_left = 162.0
+offset_top = 89.0
+offset_right = 452.0
+offset_bottom = 197.0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.881534, 0.47212, 0, -0.47212, 0.881534, -0.0547459, 2.32596, 3.87013)
+environment = ExtResource("2_cmps5")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.861629, -0.507538, 0, 0.507538, 0.861629, 0, 0.5, 0)
+mesh = SubResource("QuadMesh_gx3wq")
+skeleton = NodePath("../MeshInstance3D")
+
+[node name="Area3D" type="Area3D" parent="MeshInstance3D2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/Area3D"]
+shape = SubResource("BoxShape3D_pe025")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 5, 0, 0, 0)
+mesh = SubResource("QuadMesh_gx3wq")
+
+[node name="Area3D" type="Area3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/Area3D"]
+shape = SubResource("BoxShape3D_pe025")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.82856, 4.76837e-07, 1.96296)
+shape = SubResource("BoxShape3D_egqyk")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.82856, 4.76837e-07, 1.96296)
+shape = SubResource("BoxShape3D_egqyk")
+
+[connection signal="mouse_entered" from="UI" to="." method="MouseEnterUI"]
+[connection signal="mouse_exited" from="UI" to="." method="MouseExitUI"]
+[connection signal="input_event" from="MeshInstance3D2/Area3D" to="." method="OnArea3dInputEvent"]
+[connection signal="input_event" from="MeshInstance3D/Area3D" to="." method="OnArea3dInputEvent"]

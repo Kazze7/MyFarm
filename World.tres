@@ -1,0 +1,14 @@
+[gd_resource type="Environment" load_steps=3 format=3 uid="uid://brsjcsvmnh2nl"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xirfq"]
+sky_curve = 0.023084
+ground_bottom_color = Color(0.726621, 0.688729, 0.742188, 1)
+sun_angle_max = 70.0
+
+[sub_resource type="Sky" id="Sky_wvy76"]
+sky_material = SubResource("ProceduralSkyMaterial_xirfq")
+
+[resource]
+background_mode = 2
+background_energy_multiplier = 2.0
+sky = SubResource("Sky_wvy76")
