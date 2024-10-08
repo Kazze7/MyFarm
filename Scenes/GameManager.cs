@@ -5,10 +5,9 @@ using System.Collections.Generic;
 public partial class GameManager : Node
 {
     public static GameManager Access;
-    public GConfig Config = new();
+    public GameConfig Config = new();
 
-    [Export]
-    public GDatabase Database;
+    public Database Database = new();
 
     Dictionary<Scene, Node> scenes = new();
     Scene activeScene = Scene.Empty;
@@ -18,9 +17,11 @@ public partial class GameManager : Node
     {
         Access = this;
         //	Save files
-        KazFile.Save(Config, "GameConfig.json");
+        KazFile.Save(Config, "Data/GameConfig.json");
         //	Load files
-        KazFile.Load(out Config, "GameConfig.json");
+        KazFile.Load(out Config, "Data/GameConfig.json");
+        //  Load database
+        KazFile.Load(out Database, Database.filePath);
         //	Load scenes
         scenes.Add(Scene.Game, GD.Load<PackedScene>("res://Scenes/Game.tscn").Instantiate());
         //	Set scene

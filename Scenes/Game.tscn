@@ -1,8 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bko1f5valyr76"]
+[gd_scene load_steps=10 format=3 uid="uid://bko1f5valyr76"]
 
 [ext_resource type="Material" uid="uid://etknxtxl1lxt" path="res://PlaneMat.tres" id="1_2p2sx"]
 [ext_resource type="Script" path="res://Scenes/Game.cs" id="1_8o4w5"]
+[ext_resource type="PackedScene" uid="uid://tib2py5q5hqs" path="res://UI/StructureButton.tscn" id="2_6map4"]
 [ext_resource type="Environment" uid="uid://brsjcsvmnh2nl" path="res://World.tres" id="2_cmps5"]
+[ext_resource type="PackedScene" uid="uid://ugw3axwyat71" path="res://Structures/grass_of_earth_element.tscn" id="4_djauf"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_fa7re"]
 material = ExtResource("1_2p2sx")
@@ -16,8 +18,10 @@ size = Vector3(1, 0, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_6m3xg"]
 material = SubResource("StandardMaterial3D_mpxej")
 
-[node name="Game" type="Node3D"]
+[node name="Game" type="Node3D" node_paths=PackedStringArray("bottomPanel")]
 script = ExtResource("1_8o4w5")
+structureButton = ExtResource("2_6map4")
+bottomPanel = NodePath("UI/Panel/HBoxContainer")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -48,10 +52,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Button" type="Button" parent="UI/Panel/HBoxContainer"]
-custom_minimum_size = Vector2(90, 0)
+[node name="StructureButton" parent="UI/Panel/HBoxContainer" instance=ExtResource("2_6map4")]
 layout_mode = 2
-text = "test"
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.384198, 0.92325, 0, -0.92325, 0.384198, -0.0194355, 2.32596, 1.43658)
@@ -72,6 +74,9 @@ mesh = SubResource("PlaneMesh_fa7re")
 shape = SubResource("BoxShape3D_dmxxy")
 
 [node name="Prototype" type="Node3D" parent="."]
+
+[node name="Grass of earth element" parent="Prototype" instance=ExtResource("4_djauf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Prototype"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.2, 0)

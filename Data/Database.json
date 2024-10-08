@@ -1,0 +1,14 @@
+{
+  "Structures": [
+	{
+		"Id": 1,
+	  "Name": "Grass of Earth Element",
+	  "PackedScene": "res://Structures/grass_of_earth_element.tscn"
+	},
+	{
+		"Id":2,
+	  "Name": "Grass of Nature Element",
+	  "PackedScene": ""
+	}
+  ]
+}
