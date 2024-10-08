@@ -10,7 +10,6 @@ public partial class Game : Node3D
     public override void _Ready()
     {
     }
-
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
     {
@@ -19,16 +18,13 @@ public partial class Game : Node3D
             if (Input.IsActionJustPressed("mouse_left"))
             {
                 GD.Print("left");
-                if (KazPhysics.MouseRaycast(GetNode<Camera3D>("Camera3D"), out KazRaycastResult result))
+                if (GPhysics.MouseRaycast(GetNode<Camera3D>("Camera3D"), 100.0f, out GRaycastResult result))
                 {
                     GD.Print(result.position);
+                    GD.Print(GMath.PositionToWorldID(result.position));
                 }
             }
         }
-    }
-    public override void _PhysicsProcess(double delta)
-    {
-
     }
 
     void MouseEnterUI() { MouseOverUI = true; }

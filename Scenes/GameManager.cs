@@ -6,7 +6,9 @@ public partial class GameManager : Node
 {
     public static GameManager Access;
     public GConfig Config = new();
-    public GameData Data = new();
+
+    [Export]
+    public GDatabase Database;
 
     Dictionary<Scene, Node> scenes = new();
     Scene activeScene = Scene.Empty;

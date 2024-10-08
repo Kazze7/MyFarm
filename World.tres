@@ -10,5 +10,4 @@ sky_material = SubResource("ProceduralSkyMaterial_xirfq")
 
 [resource]
 background_mode = 2
-background_energy_multiplier = 2.0
 sky = SubResource("Sky_wvy76")

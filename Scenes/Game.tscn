@@ -1,79 +1,89 @@
-[gd_scene load_steps=7 format=3 uid="uid://bko1f5valyr76"]
+[gd_scene load_steps=8 format=3 uid="uid://bko1f5valyr76"]
 
 [ext_resource type="Material" uid="uid://etknxtxl1lxt" path="res://PlaneMat.tres" id="1_2p2sx"]
 [ext_resource type="Script" path="res://Scenes/Game.cs" id="1_8o4w5"]
 [ext_resource type="Environment" uid="uid://brsjcsvmnh2nl" path="res://World.tres" id="2_cmps5"]
 
-[sub_resource type="QuadMesh" id="QuadMesh_gx3wq"]
+[sub_resource type="PlaneMesh" id="PlaneMesh_fa7re"]
 material = ExtResource("1_2p2sx")
-orientation = 1
+size = Vector2(1, 1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_pe025"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_dmxxy"]
 size = Vector3(1, 0, 1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_egqyk"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mpxej"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_6m3xg"]
+material = SubResource("StandardMaterial3D_mpxej")
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_8o4w5")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 1280.0
-offset_bottom = 720.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Panel" type="Panel" parent="UI"]
-visible = false
-layout_mode = 0
-offset_left = 18.0
-offset_top = 20.0
-offset_right = 728.0
-offset_bottom = 391.0
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -270.0
+offset_top = -90.0
+offset_right = 270.0
+grow_horizontal = 2
+grow_vertical = 0
 
-[node name="Button" type="Button" parent="UI"]
-visible = false
-layout_mode = 0
-offset_left = 162.0
-offset_top = 89.0
-offset_right = 452.0
-offset_bottom = 197.0
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="UI/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "test"
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.881534, 0.47212, 0, -0.47212, 0.881534, -0.0547459, 2.32596, 3.87013)
+transform = Transform3D(1, 0, 0, 0, 0.384198, 0.92325, 0, -0.92325, 0.384198, -0.0194355, 2.32596, 1.43658)
 environment = ExtResource("2_cmps5")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.861629, -0.507538, 0, 0.507538, 0.861629, 0, 0.5, 0)
-mesh = SubResource("QuadMesh_gx3wq")
-skeleton = NodePath("../MeshInstance3D")
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.939693, -0.321394, 0.116978, 0, 0.34202, 0.939693, -0.34202, -0.883022, 0.321394, 0, 0, 0)
 
-[node name="Area3D" type="Area3D" parent="MeshInstance3D2"]
+[node name="World" type="Node3D" parent="."]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/Area3D"]
-shape = SubResource("BoxShape3D_pe025")
+[node name="Chunk" type="StaticBody3D" parent="World"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 5, 0, 0, 0)
-mesh = SubResource("QuadMesh_gx3wq")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Chunk"]
+mesh = SubResource("PlaneMesh_fa7re")
 
-[node name="Area3D" type="Area3D" parent="MeshInstance3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Chunk"]
+shape = SubResource("BoxShape3D_dmxxy")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/Area3D"]
-shape = SubResource("BoxShape3D_pe025")
+[node name="Prototype" type="Node3D" parent="."]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.2, 0)
+mesh = SubResource("BoxMesh_6m3xg")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.82856, 4.76837e-07, 1.96296)
-shape = SubResource("BoxShape3D_egqyk")
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -0.4, -2)
+mesh = SubResource("BoxMesh_6m3xg")
 
-[node name="StaticBody3D2" type="StaticBody3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.82856, 4.76837e-07, 1.96296)
-shape = SubResource("BoxShape3D_egqyk")
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.2, 1)
+mesh = SubResource("BoxMesh_6m3xg")
 
 [connection signal="mouse_entered" from="UI" to="." method="MouseEnterUI"]
 [connection signal="mouse_exited" from="UI" to="." method="MouseExitUI"]
-[connection signal="input_event" from="MeshInstance3D2/Area3D" to="." method="OnArea3dInputEvent"]
-[connection signal="input_event" from="MeshInstance3D/Area3D" to="." method="OnArea3dInputEvent"]

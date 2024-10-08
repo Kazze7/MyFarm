@@ -1,7 +1,7 @@
 using Godot;
 using Godot.Collections;
 
-public class KazRaycastResult
+public class GRaycastResult
 {
     public Vector3 position;
     Vector3 normal;
@@ -11,8 +11,8 @@ public class KazRaycastResult
     int shape;
     Variant metadata;
 
-    public KazRaycastResult() { }
-    public KazRaycastResult(Dictionary _result)
+    public GRaycastResult() { }
+    public GRaycastResult(Dictionary _result)
     {
         position = (Vector3)_result["position"];
     }
