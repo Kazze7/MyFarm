@@ -15,11 +15,12 @@ public partial class GameManager : Node
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        Manager.Game = this;
         Access = this;
         //	Save files
-        KazFile.Save(Config, "Data/GameConfig.json");
+        KazFile.Save(Config, "DataFiles/GameConfig.json");
         //	Load files
-        KazFile.Load(out Config, "Data/GameConfig.json");
+        KazFile.Load(out Config, "DataFiles/GameConfig.json");
         //  Load database
         KazFile.Load(out Database, Database.filePath);
         //	Load scenes

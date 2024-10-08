@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://bko1f5valyr76"]
 
 [ext_resource type="Material" uid="uid://etknxtxl1lxt" path="res://PlaneMat.tres" id="1_2p2sx"]
-[ext_resource type="Script" path="res://Scenes/Game.cs" id="1_8o4w5"]
+[ext_resource type="Script" path="res://Scripts/Core/Game.cs" id="1_8o4w5"]
 [ext_resource type="PackedScene" uid="uid://tib2py5q5hqs" path="res://UI/StructureButton.tscn" id="2_6map4"]
 [ext_resource type="Environment" uid="uid://brsjcsvmnh2nl" path="res://World.tres" id="2_cmps5"]
 [ext_resource type="PackedScene" uid="uid://ugw3axwyat71" path="res://Structures/grass_of_earth_element.tscn" id="4_djauf"]
