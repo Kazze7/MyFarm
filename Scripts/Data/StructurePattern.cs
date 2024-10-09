@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class Structure
+public class StructurePattern
 {
     public int Id { get; set; } = 0;
     public string Name { get; set; } = "";

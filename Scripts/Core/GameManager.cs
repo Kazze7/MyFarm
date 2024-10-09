@@ -4,10 +4,10 @@ using System.Collections.Generic;
 
 public partial class GameManager : Node
 {
-    public static GameManager Access;
-    public GameConfig Config = new();
+    public AppConfig Config = new();
 
     public Database Database = new();
+    public WorldData WorldData = new();
 
     Dictionary<Scene, Node> scenes = new();
     Scene activeScene = Scene.Empty;
@@ -16,7 +16,6 @@ public partial class GameManager : Node
     public override void _Ready()
     {
         Manager.Game = this;
-        Access = this;
         //	Save files
         KazFile.Save(Config, "DataFiles/GameConfig.json");
         //	Load files

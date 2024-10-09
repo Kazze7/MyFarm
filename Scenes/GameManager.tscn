@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://bwqdisjles4im"]
+[gd_scene load_steps=3 format=3 uid="uid://bwqdisjles4im"]
 
 [ext_resource type="Script" path="res://Scripts/Core/GameManager.cs" id="1_x01ec"]
+[ext_resource type="Script" path="res://Scripts/Core/InputManager.cs" id="2_divv3"]
 
 [node name="GameManager" type="Node"]
 script = ExtResource("1_x01ec")
+
+[node name="InputManager" type="Node" parent="."]
+script = ExtResource("2_divv3")
