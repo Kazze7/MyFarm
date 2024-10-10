@@ -23,9 +23,10 @@ public partial class GameManager : Node
         //  Load database
         LoadDatabase();
         //	Load scenes
-        scenes.Add(Scene.Game, GD.Load<PackedScene>("res://Scenes/Game.tscn").Instantiate());
+        scenes.Add(Scene.Menu, GD.Load<PackedScene>("res://Scenes/MainMenu.tscn").Instantiate());
+        scenes.Add(Scene.Game, GD.Load<PackedScene>("res://Scenes/GameWorld.tscn").Instantiate());
         //	Set scene
-        SetScene(Scene.Game);
+        SetScene(Scene.Menu);
     }
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
