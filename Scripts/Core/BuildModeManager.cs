@@ -52,7 +52,8 @@ public partial class BuildModeManager : Node3D
     }
     public void BuildStructure()
     {
-        Manager.World.AddStructure(new StructureData(currentID, structurePattern));
+        if (Manager.World.IsBuildable((WorldID)currentID))
+            Manager.World.AddStructure(new StructureData((WorldID)currentID, structurePattern));
     }
 
     public void DisableBuildMode()
