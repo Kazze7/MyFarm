@@ -12,4 +12,10 @@ public class Database
     {
         KazFile.Save(this, filePath);
     }
+    public void Indexing()
+    {
+        int x = 0;
+        Structures.ForEach(structure => structure.Id = x++);
+        Save();
+    }
 }

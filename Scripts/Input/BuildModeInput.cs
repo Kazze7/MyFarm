@@ -5,7 +5,11 @@ public class BuildModeInput : InputBehavior
 {
     public override void Keyboard()
     {
-
+        if(Input.IsActionJustPressed("key_esc"))
+        {
+            Manager.BuildMode.DisableBuildMode();
+            return;
+        }
     }
 
     public override void Mouse()
@@ -21,15 +25,11 @@ public class BuildModeInput : InputBehavior
             {
                 if (GPhysics.MouseRaycast(Manager.Camera.MainCamera, 100.0f, out GRaycastResult result))
                 {
+                    Manager.BuildMode.SetMousePosition(result.position);
                     if (Input.IsActionJustPressed("mouse_left"))
                     {
-                        GD.Print("left build");
-                        GD.Print(GMath.PositionToWorldID(result.position));
+                        Manager.BuildMode.BuildStructure();
                     }
-
-                    //Manager.BuildMode.SetGhostPosition(GMath.PositionToTile(result.position));
-
-                    //Manager.BuildMode.ShowGhost();
                 }
             }
         }

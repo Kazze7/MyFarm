@@ -21,7 +21,7 @@ public partial class GameManager : Node
         //	Load files
         KazFile.Load(out Config, "DataFiles/GameConfig.json");
         //  Load database
-        KazFile.Load(out Database, Database.filePath);
+        LoadDatabase();
         //	Load scenes
         scenes.Add(Scene.Game, GD.Load<PackedScene>("res://Scenes/Game.tscn").Instantiate());
         //	Set scene
@@ -32,6 +32,11 @@ public partial class GameManager : Node
     {
     }
 
+    void LoadDatabase()
+    {
+        KazFile.Load(out Database, Database.filePath);
+        //Database.Indexing();
+    }
     void SetScene(Scene _scene)
     {
         Node node;

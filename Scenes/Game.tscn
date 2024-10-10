@@ -79,10 +79,12 @@ mesh = SubResource("PlaneMesh_fa7re")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="World/Chunk"]
 shape = SubResource("BoxShape3D_dmxxy")
 
-[node name="BuildMode" type="Node3D" parent="." node_paths=PackedStringArray("ghostNode")]
+[node name="BuildMode" type="Node3D" parent="."]
 visible = false
 script = ExtResource("7_kad2g")
-ghostNode = NodePath(".")
+
+[node name="GhostContainer" type="Node3D" parent="BuildMode"]
+visible = false
 
 [node name="Prototype" type="Node3D" parent="."]
 

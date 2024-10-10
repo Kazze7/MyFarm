@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://ugw3axwyat71"]
+[gd_scene load_steps=3 format=3 uid="uid://ugw3axwyat71"]
+
+[ext_resource type="Script" path="res://Scripts/Structure/StructureLogic.cs" id="1_sk6jb"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_epe7y"]
 top_radius = 0.4
@@ -6,6 +8,7 @@ bottom_radius = 0.4
 height = 0.4
 
 [node name="Grass of earth element" type="Node3D"]
+script = ExtResource("1_sk6jb")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CylinderMesh_epe7y")

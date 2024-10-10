@@ -13,6 +13,12 @@ public static class GMath
         wordlID.Z = Mathf.RoundToInt(_position.Z);
         return wordlID;
     }
+    public static Vector3 WorldIDToPosition(Vector3I _worldID)
+    {
+        Vector3 position = new();
+        position = (Vector3)_worldID / density;
+        return position;
+    }
     public static Vector3 PositionToTile(Vector3 _position)
     {
         Vector3 position = new();
