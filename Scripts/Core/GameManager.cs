@@ -7,24 +7,24 @@ public partial class GameManager : Node
     public AppConfig Config = new();
 
     public Database Database = new();
-    public WorldData WorldData = new();
+    public string WorldDirectory = "";
 
-    Dictionary<Scene, Node> scenes = new();
-    Scene activeScene = Scene.Empty;
+    Dictionary<Scene, PackedScene> scenes = new();
+    Node activeScene;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         Manager.Game = this;
         //	Save files
-        KazFile.Save(Config, "DataFiles/GameConfig.json");
+        GFile.Save(Config, "DataFiles/GameConfig.json");
         //	Load files
-        KazFile.Load(out Config, "DataFiles/GameConfig.json");
+        GFile.Load(out Config, "DataFiles/GameConfig.json");
         //  Load database
-        LoadDatabase();
+        GFile.Load(out Database, Global.DatabasePath);
         //	Load scenes
-        scenes.Add(Scene.Menu, GD.Load<PackedScene>("res://Scenes/MainMenu.tscn").Instantiate());
-        scenes.Add(Scene.Game, GD.Load<PackedScene>("res://Scenes/GameWorld.tscn").Instantiate());
+        scenes.Add(Scene.Menu, GD.Load<PackedScene>("res://Scenes/MainMenu.tscn"));
+        scenes.Add(Scene.Game, GD.Load<PackedScene>("res://Scenes/GameWorld.tscn"));
         //	Set scene
         SetScene(Scene.Menu);
     }
@@ -33,18 +33,11 @@ public partial class GameManager : Node
     {
     }
 
-    void LoadDatabase()
+    public void SetScene(Scene _scene)
     {
-        KazFile.Load(out Database, Database.filePath);
-        //Database.Indexing();
-    }
-    void SetScene(Scene _scene)
-    {
-        Node node;
-        if (scenes.TryGetValue(activeScene, out node))
-            RemoveChild(node);
-        activeScene = _scene;
-        if (scenes.TryGetValue(activeScene, out node))
-            AddChild(node);
+        if (activeScene!=null)
+            RemoveChild(activeScene);
+        if (scenes.TryGetValue(_scene, out PackedScene packedScene))
+            AddChild(activeScene = packedScene.Instantiate());
     }
 }

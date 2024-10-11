@@ -1,8 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://cd5rjyvva8wgf"]
+[gd_scene load_steps=3 format=3 uid="uid://cd5rjyvva8wgf"]
 
 [ext_resource type="Script" path="res://Scripts/Core/MenuUIManager.cs" id="1_76ak7"]
+[ext_resource type="PackedScene" uid="uid://ckgqec7fwpc2h" path="res://UI/GameWorldButton.tscn" id="2_3s3uc"]
 
-[node name="MainMenu" type="Control"]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("subMenu", "selectGameContainer")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -10,48 +11,28 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_76ak7")
+subMenu = [NodePath("Menu"), NodePath("SelectGame"), NodePath("NewGame"), NodePath("Options")]
+selectGameContainer = NodePath("SelectGame/Panel/VBoxContainer")
+gameWorldButton = ExtResource("2_3s3uc")
 
-[node name="Control" type="Control" parent="."]
+[node name="Background" type="Panel" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="New" type="Button" parent="Control"]
+[node name="Menu" type="Control" parent="."]
+visible = false
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -135.0
-offset_top = 81.5
-offset_right = 135.0
-offset_bottom = 126.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Wyjście"
 
-[node name="Load" type="Button" parent="Control"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -135.0
-offset_top = -22.5
-offset_right = 135.0
-offset_bottom = 22.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "Wczytaj grę"
-
-[node name="Exit" type="Button" parent="Control"]
+[node name="NewWorld" type="Button" parent="Menu"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -64,11 +45,161 @@ offset_right = 135.0
 offset_bottom = -41.5
 grow_horizontal = 2
 grow_vertical = 2
-text = "Nowa gra"
+text = "New World"
 
-[node name="Control2" type="Control" parent="."]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="LoadWorld" type="Button" parent="Menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -135.0
+offset_top = -22.5
+offset_right = 135.0
+offset_bottom = 22.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Load World"
 
-[connection signal="pressed" from="Control/New" to="." method="ExitGame"]
+[node name="Options" type="Button" parent="Menu"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -135.0
+offset_top = 41.5
+offset_right = 135.0
+offset_bottom = 86.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Options"
+
+[node name="Exit" type="Button" parent="Menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -135.0
+offset_top = 145.5
+offset_right = 135.0
+offset_bottom = 190.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Exit"
+
+[node name="SelectGame" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Back" type="Button" parent="SelectGame"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -135.0
+offset_top = 145.5
+offset_right = 135.0
+offset_bottom = 190.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Back"
+
+[node name="Panel" type="Panel" parent="SelectGame"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -270.0
+offset_top = -236.0
+offset_right = 270.0
+offset_bottom = 124.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SelectGame/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameWorldButton" parent="SelectGame/Panel/VBoxContainer" instance=ExtResource("2_3s3uc")]
+layout_mode = 2
+
+[node name="NewGame" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Back" type="Button" parent="NewGame"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -135.0
+offset_top = 145.5
+offset_right = 135.0
+offset_bottom = 190.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Back"
+
+[node name="LineEdit" type="LineEdit" parent="NewGame"]
+layout_mode = 0
+offset_left = 505.0
+offset_top = 274.0
+offset_right = 775.0
+offset_bottom = 319.0
+
+[node name="CreateWorld" type="Button" parent="NewGame"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -135.0
+offset_top = -22.5
+offset_right = 135.0
+offset_bottom = 22.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Create World"
+
+[node name="Options" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="pressed" from="Menu/NewWorld" to="." method="SelectSubMenu" binds= [2]]
+[connection signal="pressed" from="Menu/LoadWorld" to="." method="SelectSubMenu" binds= [1]]
+[connection signal="pressed" from="Menu/Exit" to="." method="ExitGame"]
+[connection signal="pressed" from="SelectGame/Back" to="." method="SelectSubMenu" binds= [0]]
+[connection signal="pressed" from="NewGame/Back" to="." method="SelectSubMenu" binds= [0]]
+[connection signal="text_changed" from="NewGame/LineEdit" to="." method="SetWorldName"]
+[connection signal="pressed" from="NewGame/CreateWorld" to="." method="CreateWorld"]

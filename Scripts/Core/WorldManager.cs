@@ -6,7 +6,7 @@ using System.Linq;
 
 public partial class WorldManager : Node
 {
-    WorldData world;
+    WorldData data = new();
     ConcurrentDictionary<WorldID, bool> nodes = new();
 
     ConcurrentDictionary<WorldID, StructureLogic> structures = new();
@@ -15,7 +15,6 @@ public partial class WorldManager : Node
     public override void _Ready()
     {
         Manager.World = this;
-        world = Manager.Game.WorldData;
         Load();
     }
 
@@ -26,15 +25,15 @@ public partial class WorldManager : Node
 
     void Load()
     {
-        KazFile.Load(out world, "DataFiles/WorldData.json");
-        world.structures.ForEach(structure => AddStructure(structure));
-        Manager.GameUI.SetResources(world.resources);
+        GFile.Load(out data, Manager.Game.WorldDirectory + Global.WorldDataPath);
+        data.structures.ForEach(structure => AddStructure(structure));
+        Manager.GameUI.SetResources(data.resources);
     }
-    void Save()
+    public void Save()
     {
-        world.structures.Clear();
-        structures.Values.ToList().ForEach(structure => world.structures.Add(structure.data));
-        KazFile.Save(world, "DataFiles/WorldData.json");
+        data.structures.Clear();
+        structures.Values.ToList().ForEach(structure => data.structures.Add(structure.data));
+        GFile.Save(data, Manager.Game.WorldDirectory + Global.WorldDataPath);
     }
 
     public bool IsBuildable(WorldID _worldID)
@@ -43,18 +42,17 @@ public partial class WorldManager : Node
     }
     public void AddStructure(StructureData _structureData)
     {
-        if (!structures.ContainsKey(_structureData.worldID))
+        if (!structures.ContainsKey(_structureData.WorldID))
         {
-            StructureLogic structureLogic = (StructureLogic)GD.Load<PackedScene>(Manager.Game.Database.Structures[_structureData.id].PackedScene).Instantiate();
-            structureLogic.Position = GMath.WorldIDToPosition((Vector3I)_structureData.worldID);
-            structureLogic.Name += " " + _structureData.worldID;
+            StructureLogic structureLogic = (StructureLogic)GD.Load<PackedScene>(Manager.Game.Database.Structures[_structureData.Id].PackedScene).Instantiate();
+            structureLogic.Position = GMath.WorldIDToPosition((Vector3I)_structureData.WorldID);
+            structureLogic.Name += " " + _structureData.WorldID;
             structureLogic.data = _structureData;
-            if (structures.TryAdd(_structureData.worldID, structureLogic))
+            if (structures.TryAdd(_structureData.WorldID, structureLogic))
             {
-                nodes.TryAdd(_structureData.worldID, true);
+                nodes.TryAdd(_structureData.WorldID, true);
                 Manager.World.AddChild(structureLogic);
             }
-            //Save();
         }
     }
     public void RemoveStructure(WorldID _worldID)

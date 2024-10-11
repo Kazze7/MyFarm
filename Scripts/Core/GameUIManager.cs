@@ -28,7 +28,7 @@ public partial class GameUIManager : Node
     void ReloadUI()
     {
         //  Clean
-        structureContainer.GetChildren().ToList().ForEach(child => child.Free());
+        GUtility.FreeAllChildNode(structureContainer);
         //  Load
         Manager.Game.Database.Structures.ForEach(structure =>
         {
@@ -44,5 +44,10 @@ public partial class GameUIManager : Node
         earth.Text = "Earth " + _resource.earth;
         nature.Text = "Nature " + _resource.nature;
         fire.Text = "Fire " + _resource.fire;
+    }
+    void CloseWorld()
+    {
+        Manager.World.Save();
+        Manager.Game.SetScene(Scene.Menu);
     }
 }

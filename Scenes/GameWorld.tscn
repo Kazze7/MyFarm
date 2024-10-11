@@ -79,6 +79,7 @@ text = "Earth"
 
 [node name="Label2" type="Label" parent="UI/PanelTop"]
 custom_minimum_size = Vector2(90, 0)
+layout_mode = 0
 offset_left = 90.0
 offset_right = 180.0
 offset_bottom = 23.0
@@ -86,10 +87,26 @@ text = "Nature"
 
 [node name="Label3" type="Label" parent="UI/PanelTop"]
 custom_minimum_size = Vector2(90, 0)
+layout_mode = 0
 offset_left = 180.0
 offset_right = 270.0
 offset_bottom = 23.0
 text = "Fire"
+
+[node name="Close" type="Button" parent="UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 337.0
+offset_top = 289.5
+offset_right = 607.0
+offset_bottom = 334.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Close"
 
 [node name="Camera" type="Node3D" parent="."]
 script = ExtResource("3_ubuqr")
@@ -136,3 +153,4 @@ mesh = SubResource("BoxMesh_6m3xg")
 
 [connection signal="mouse_entered" from="UI" to="UI" method="MouseEnterUI"]
 [connection signal="mouse_exited" from="UI" to="UI" method="MouseExitUI"]
+[connection signal="pressed" from="UI/Close" to="UI" method="CloseWorld"]
